@@ -1,0 +1,27 @@
+# Flutter/Dart
+.dart_tool/
+.packages
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Generated
+*.g.dart
+*.freezed.dart
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Isar
+*.isar
+*.isar.lock
+
+# Misc
+*.log
+*.tmp
