@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import '../../core/models/claim.dart';
 import '../../core/services/export_service.dart';
@@ -131,6 +132,57 @@ class _ClaimListScreenState extends State<ClaimListScreen> {
     }
   }
 
+  Future<void> _importClaims() async {
+    try {
+      final result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['json'],
+      );
+
+      if (result == null || result.files.isEmpty) {
+        return; // User cancelled
+      }
+
+      final filePath = result.files.single.path;
+      if (filePath == null) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Could not read file path'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+        return;
+      }
+
+      final importResult = await ExportService.importFromFile(filePath);
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(importResult.summary),
+            backgroundColor: importResult.success ? Colors.green : Colors.red,
+            duration: const Duration(seconds: 3),
+          ),
+        );
+
+        if (importResult.success && importResult.importedCount > 0) {
+          _loadClaims(); // Refresh the list
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Import failed: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,6 +201,15 @@ class _ClaimListScreenState extends State<ClaimListScreen> {
         ),
         centerTitle: true,
         actions: [
+          IconButton(
+            icon: Icon(
+              Icons.upload_outlined,
+              color: Colors.grey[600],
+              size: 20,
+            ),
+            onPressed: _importClaims,
+            tooltip: 'Import claims',
+          ),
           IconButton(
             icon: Icon(
               Icons.download_outlined,
