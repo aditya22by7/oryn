@@ -137,6 +137,17 @@ If you disagree with a claim's evaluation, fork the data.
 
 MIT License. See LICENSE file.
 
+## Explicit Non-Goals
+
+Oryn explicitly does **NOT** provide:
+
+- **Truth:** It measures confidence based on available proof; it does not declare absolute truth.
+- **Consensus:** It is designed for individual verification, not global agreement. Disagreement is resolved by forking, not arguing.
+- **Authority:** The system has no admin roles, no privileged users, and no central "fact-checkers."
+- **Social Validation:** There are no likes, upvotes, follower counts, or other social metrics. The validity of a claim is independent of its popularity.
+- **Moderation:** There is no mechanism for human moderation or censorship of claims.
+- **Global Agreement:** Two users with different sets of evidence for the same claim will compute different confidence scores. This is correct behavior.
+
 - Contributing
 
 Open issues for bugs. Open PRs for fixes.

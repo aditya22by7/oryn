@@ -7,6 +7,7 @@ part 'claim.g.dart';
 @collection
 class Claim {
   Id isarId = Isar.autoIncrement;
+  String protocolVersion = '0.0.1';
 
   @Index(unique: true)
   String? id;
@@ -28,6 +29,7 @@ class Claim {
   double confidenceScore = 0.0; // 0.0 to 1.0, computed not manual
 
   Claim({
+    this.protocolVersion = '0.0.1',
     this.id,
     this.statement,
     this.scope,
@@ -61,6 +63,7 @@ class Claim {
 
   /// Copy with modifications
   Claim copyWith({
+    String? protocolVersion,
     String? id,
     String? statement,
     String? scope,
@@ -72,6 +75,7 @@ class Claim {
     double? confidenceScore,
   }) {
     return Claim(
+      protocolVersion: protocolVersion ?? this.protocolVersion,
       id: id ?? this.id,
       statement: statement ?? this.statement,
       scope: scope ?? this.scope,
