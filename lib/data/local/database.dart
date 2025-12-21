@@ -11,7 +11,7 @@ class OrynDatabase {
     final dir = await getApplicationDocumentsDirectory();
 
     _instance = await Isar.open(
-      [ClaimSchema],
+      [ClaimSchema],  // Only ClaimSchema, NOT ClaimLinkSchema
       directory: dir.path,
       name: 'oryn_db',
     );

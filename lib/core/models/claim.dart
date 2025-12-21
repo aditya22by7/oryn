@@ -120,8 +120,6 @@ class Claim {
   }
 
   // --- Conversion Methods ---
-
-  // Convert from pure data class to Isar object
   factory Claim.fromData(ClaimData data) {
     return Claim()
       ..id = data.id
@@ -136,7 +134,6 @@ class Claim {
       ..confidenceScore = data.confidenceScore;
   }
 
-  // Convert from Isar object to pure data class
   ClaimData toData() {
     return ClaimData(
       id: id!,

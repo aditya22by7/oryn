@@ -4,14 +4,12 @@ import '../../core/engines/claim/claim_engine.dart';
 import '../../core/engines/confidence/confidence_engine.dart';
 import '../../data/repositories/claim_repository.dart';
 import '../widgets/confidence_bar.dart';
-import '../widgets/decay_chart.dart';
 import '../widgets/evidence_tile.dart';
+import '../widgets/decay_chart.dart';
 import 'attach_evidence_screen.dart';
 import 'create_claim_screen.dart';
 
 /// Full claim detail view
-///
-/// Shows confidence breakdown, evidence, counter-evidence
 class ClaimDetailScreen extends StatefulWidget {
   final Claim claim;
 
