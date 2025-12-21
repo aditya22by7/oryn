@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../core/models/claim.dart';
+import '../../core/services/export_service.dart';
 import '../../data/repositories/claim_repository.dart';
 import '../widgets/claim_tile.dart';
 import 'claim_detail_screen.dart';
@@ -35,6 +36,7 @@ class _ClaimListScreenState extends State<ClaimListScreen> {
       _loading = false;
     });
   }
+
 
   Future<void> _deleteClaim(Claim claim) async {
     final confirmed = await showDialog<bool>(
@@ -94,6 +96,41 @@ class _ClaimListScreenState extends State<ClaimListScreen> {
     _loadClaims();
   }
 
+  Future<void> _exportAllClaims() async {
+    if (_claims.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('No claims to export'),
+          backgroundColor: Colors.orange,
+        ),
+      );
+      return;
+    }
+
+    try {
+      final filePath = await ExportService.exportAllToFile();
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Exported to: $filePath'),
+            backgroundColor: Colors.green,
+            duration: const Duration(seconds: 5),
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Export failed: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,6 +149,15 @@ class _ClaimListScreenState extends State<ClaimListScreen> {
         ),
         centerTitle: true,
         actions: [
+          IconButton(
+            icon: Icon(
+              Icons.download_outlined,
+              color: Colors.grey[600],
+              size: 20,
+            ),
+            onPressed: _exportAllClaims,
+            tooltip: 'Export all claims',
+          ),
           Padding(
             padding: const EdgeInsets.only(right: 16),
             child: Center(

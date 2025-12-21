@@ -22,6 +22,7 @@ dependencies:
   uuid: ^4.2.1
   path_provider: ^2.1.1
   intl: ^0.18.1
+  freezed: ^2.5.2
 
 dev_dependencies:
   flutter_test:
@@ -30,7 +31,6 @@ dev_dependencies:
 
   # Code Generation
   build_runner: ^2.4.7
-  freezed: ^2.4.5
   json_serializable: ^6.7.1
   isar_generator: ^3.1.0+1
 
