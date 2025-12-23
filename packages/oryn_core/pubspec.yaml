@@ -1,0 +1,12 @@
+name: oryn_core
+description: Core engine for Oryn truth-resolution protocol. Pure Dart, no dependencies.
+version: 0.0.1
+homepage: https://github.com/aditya22by7/oryn
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies: {}
+
+dev_dependencies:
+  test: ^1.24.0
