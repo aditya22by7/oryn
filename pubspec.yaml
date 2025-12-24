@@ -10,6 +10,11 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # Local Core Package
+  oryn_core:
+    path: packages/oryn_core
+
+
   # Local Database
   isar: ^3.1.0+1
   isar_flutter_libs: ^3.1.0+1

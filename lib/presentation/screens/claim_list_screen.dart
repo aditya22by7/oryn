@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:oryn/presentation/screens/statistics_screen.dart';
 import '../../core/models/claim.dart';
 import '../../data/repositories/claim_repository.dart';
 import '../../core/services/export_service.dart';
@@ -245,6 +246,15 @@ class _ClaimListScreenState extends State<ClaimListScreen> {
     }
   }
 
+  void _openStatistics() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const StatisticsScreen(),
+      ),
+    );
+  }
+
   void _showSortOptions() {
     showModalBottomSheet(
       context: context,
@@ -361,6 +371,16 @@ class _ClaimListScreenState extends State<ClaimListScreen> {
         ),
         centerTitle: !_showSearch,
         actions: [
+          if (!_showSearch)
+            IconButton(
+              icon: Icon(
+                Icons.analytics_outlined,
+                color: Colors.grey[600],
+                size: 20,
+              ),
+              onPressed: _openStatistics,
+              tooltip: 'View statistics',
+            ),
           IconButton(
             icon: Icon(
               _showSearch ? Icons.close : Icons.search,

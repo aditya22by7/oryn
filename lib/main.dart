@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'data/local/database.dart';
 import 'presentation/screens/claim_list_screen.dart';
+import 'package:oryn_core/oryn_core.dart' as core;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
