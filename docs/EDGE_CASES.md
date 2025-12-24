@@ -327,3 +327,77 @@ User can retry
 | Future time | tomorrow | reject |
 | Empty statement | "" | reject |
 | Duplicate ID | same id twice | reject second |
+
+## 10. Evidence Retraction
+
+### 10.1 Rationale
+
+Evidence is immutable once added:
+- `id` must not change
+- `added_at` must not change
+- Historical state must remain inspectable
+
+However, humans make mistakes:
+- Wrong link added
+- Misinterpreted source
+- Later discovered to be fraudulent
+
+Silent deletion or editing would:
+- Erase history
+- Enable retroactive truth rewriting
+- Break auditability
+
+Therefore, Oryn allows **retraction** but not silent removal.
+
+### 10.2 Retraction vs Deletion
+
+- **Deletion** (not allowed):
+    - Evidence disappears as if it never existed
+    - History is lost
+    - Consumers cannot see what changed
+
+- **Retraction** (allowed, recommended):
+    - Evidence remains in the record
+    - Marked as "retracted"
+    - Contributes zero weight to confidence
+    - Remains visible and auditable
+
+### 10.3 Expected Behavior
+
+When evidence is retracted:
+
+1. The original evidence record MUST remain stored.
+2. A "retracted" flag (or equivalent status) SHOULD be set.
+3. Retraction SHOULD include:
+    - Timestamp
+    - Optional reason (text)
+4. The confidence engine MUST treat retracted evidence as having **zero** effective strength.
+5. Retraction events SHOULD be visible in any UI.
+
+### 10.4 Non-Goals
+
+Retracting evidence does **not**:
+
+- Restore previous confidence scores automatically
+- Remove the fact that the evidence was once considered
+- Imply that the evidence source is globally invalid
+
+It only means:
+> "For this claim, this piece of evidence is no longer counted."
+
+### 10.5 Current Implementation Status (v0.1.0)
+
+In protocol v0.0.1 and engine v0.1.0:
+
+- Retraction is defined at the **protocol level** only.
+- There is **no** implementation of:
+    - Evidence status
+    - Retraction flag
+    - Retraction UI
+
+Any future implementation of retraction MUST:
+- Respect all invariants
+- Preserve historical data
+- Remain deterministic
+
+Until then, consumers SHOULD avoid silent deletion and instead model retraction explicitly if needed.
