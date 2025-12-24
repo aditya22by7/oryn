@@ -1,7 +1,13 @@
 name: oryn_core
-description: Core engine for Oryn truth-resolution protocol. Pure Dart, no dependencies.
-version: 0.0.1
+description: >
+  Proof-oriented claim evaluation engine defined by the Oryn Protocol.
+  Computes confidence for claims over time using evidence, counter-evidence,
+  and time decay. Pure Dart, no external dependencies.
+
+version: 0.1.0
 homepage: https://github.com/aditya22by7/oryn
+repository: https://github.com/aditya22by7/oryn
+issue_tracker: https://github.com/aditya22by7/oryn/issues
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
